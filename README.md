@@ -9,7 +9,7 @@ A fast CSV multi-thread reader
 
         String file = ...
         String [] cols = ...
-        double[][] data = CSV.readMetrics(file, cols, 4, 8, 0);
+        double[][] data = CSV.readMatrix(file, cols, 4, 8, 0);
     
         String[][] d2 = CSV.readCsv(file, cols, true, 4, 1, 0);
 
