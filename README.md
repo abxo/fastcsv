@@ -14,7 +14,19 @@ A fast CSV multi-thread reader
         String[][] d2 = CSV.readCsv(file, cols, true, 4, 1, 0);
 
         
-性能：
+单线程性能：
 
 
 ![](fastcsv.PNG)
+
+
+
+【说明】
+
+       上述性能测试，不涉及磁盘、网络，仅仅为内存数据处理速度，并且不保存数据，跟真实读取有较大差距。
+       
+       真实数据测试（i7 4core 8thread, 12 GB内存）：
+       300MB，每行482列，共50000行csv，读取String[][] 耗时0.3-1.5秒左右（受GC影响严重），读取double[][]耗时0.45-0.6秒
+       
+      
+
