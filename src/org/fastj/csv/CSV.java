@@ -1,6 +1,5 @@
 package org.fastj.csv;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -20,7 +19,7 @@ public class CSV {
 	 *            需要读取的列头(Columns to read)
 	 * @return String[][]
 	 */
-	public static String[][] readCsv(String file, String[] cols) {
+	public static String[][] readCsv(String file, String[] cols) throws IOException {
 		return readCsv(file, cols, true);
 	}
 
@@ -35,12 +34,8 @@ public class CSV {
 	 *            是否在结果中返回列头(Returns the column head in the result?)
 	 * @return String[][]
 	 */
-	public static String[][] readCsv(String file, String[] cols, boolean addHeader) {
-		try {
-			return readCsv(new FileReader(file), cols, addHeader);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("File not found.");
-		}
+	public static String[][] readCsv(String file, String[] cols, boolean addHeader) throws IOException {
+		return readCsv(new FileReader(file), cols, addHeader);
 	}
 
 	/**
@@ -58,13 +53,9 @@ public class CSV {
 	 *            是否在结果中返回列头(Returns the column head in the result?)
 	 * @return String[][]
 	 */
-	public static String[][] readCsv(String file, String[] cols, int readTH, int headerLine, boolean addHeader) {
-		try {
-			SimpleMTReader r = new SimpleMTReader(file, readTH, headerLine, cols);
-			return r.get(addHeader);
-		} catch (IOException e) {
-			throw new RuntimeException("IOE:" + e.getMessage());
-		}
+	public static String[][] readCsv(String file, String[] cols, int readTH, int headerLine, boolean addHeader) throws IOException {
+		SimpleMTReader r = new SimpleMTReader(file, readTH, headerLine, cols);
+		return r.get(addHeader);
 	}
 
 	/**
@@ -76,7 +67,7 @@ public class CSV {
 	 *            是否在结果中返回列头(Returns the column head in the result?)
 	 * @return String[][]
 	 */
-	public static String[][] readCsv(Reader reader, String[] cols, boolean addHeader) {
+	public static String[][] readCsv(Reader reader, String[] cols, boolean addHeader) throws IOException {
 		List<String[]> list = new LinkedList<>();
 
 		CharBuf buf = CharBuf.POOL.get();
@@ -98,7 +89,6 @@ public class CSV {
 			}
 
 			data = list.toArray(new String[list.size()][]);
-		} catch (IOException e) {
 		} finally {
 			CharBuf.POOL.release(buf);
 			CharBuf.POOL.release(fieldBuf);
@@ -125,14 +115,9 @@ public class CSV {
 	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
 	 * @return
 	 */
-	public static String[][] readCsv(String file, String[] cols, boolean addHeader, int readTH, int parseTHPerRead, int headerLine) {
-		try {
-			N2NStringReader nr = new N2NStringReader(file, readTH, parseTHPerRead, 0, null);
-			return nr.get(addHeader);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		}
+	public static String[][] readCsv(String file, String[] cols, boolean addHeader, int readTH, int parseTHPerRead, int headerLine) throws IOException {
+		N2NStringReader nr = new N2NStringReader(file, readTH, parseTHPerRead, headerLine, cols);
+		return nr.get(addHeader);
 	}
 
 	/**
@@ -151,14 +136,9 @@ public class CSV {
 	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
 	 * @return double[][]
 	 */
-	public static double[][] readMatrix(String file, String[] cols, int readTH, int parseTHPerRead, int headerLine) {
-		try {
-			N2NMatrixReader nr = new N2NMatrixReader(file, readTH, parseTHPerRead, headerLine, null);
-			return nr.get();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		}
+	public static double[][] readMatrix(String file, String[] cols, int readTH, int parseTHPerRead, int headerLine) throws IOException {
+		N2NMatrixReader nr = new N2NMatrixReader(file, readTH, parseTHPerRead, headerLine, cols);
+		return nr.get();
 	}
 
 	/**
@@ -170,7 +150,7 @@ public class CSV {
 	 *            需要读取的列头(Columns to read)
 	 * @return double[][]
 	 */
-	public static double[][] readMatrix(Reader reader, String[] cols) {
+	public static double[][] readMatrix(Reader reader, String[] cols) throws IOException {
 
 		List<double[]> list = new LinkedList<>();
 
@@ -188,8 +168,8 @@ public class CSV {
 			}
 
 			rlt = list.toArray(new double[list.size()][]);
-
-		} catch (IOException e) {
+		} finally {
+			// nothing
 		}
 
 		return rlt;
@@ -204,12 +184,8 @@ public class CSV {
 	 *            需要读取的列头(Columns to read)
 	 * @return double[][]
 	 */
-	public static double[][] readMatrix(String file, String[] cols) {
-		try {
-			return readMatrix(new FileReader(file), cols);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("File not found.");
-		}
+	public static double[][] readMatrix(String file, String[] cols) throws IOException {
+		return readMatrix(new FileReader(file), cols);
 	}
 
 	/**
@@ -225,13 +201,9 @@ public class CSV {
 	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
 	 * @return double[][]
 	 */
-	public static double[][] readMatrix(String file, String[] cols, int readTH, int headerLine) {
-		try {
-			SimpleMTReader r = new SimpleMTReader(file, readTH, headerLine, cols);
-			return r.get();
-		} catch (IOException e) {
-			throw new RuntimeException("IOE:" + e.getMessage());
-		}
+	public static double[][] readMatrix(String file, String[] cols, int readTH, int headerLine) throws IOException {
+		SimpleMTReader r = new SimpleMTReader(file, readTH, headerLine, cols);
+		return r.get();
 	}
 
 }
