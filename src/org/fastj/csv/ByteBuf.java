@@ -46,7 +46,7 @@ public final class ByteBuf {
 		value[count++] = c;
 	}
 
-	public ByteBuf append(byte str[], int offset, int len) {
+	public ByteBuf append(byte[] str, int offset, int len) {
 		int nlen = count + len;
 		if (capacity < nlen) {
 			ensureCapacity(nlen);

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 final class ObjectPool<T> {
 
-	static interface ObjectFactory<T> {
+	interface ObjectFactory<T> {
 		T create();
 	}
 

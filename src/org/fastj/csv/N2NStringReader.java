@@ -141,7 +141,7 @@ final class N2NStringReader {
 		final CountDownLatch latch;
 		final List<StrNode> result = new LinkedList<>();
 		CharBuf field = CharBuf.POOL.get();
-		Object notifier;
+		final Object notifier;
 
 		Task(RingBuffer<CharBuf> buffer, CountDownLatch latch, Object notifier) {
 			this.buffer = buffer;
@@ -180,7 +180,7 @@ final class N2NStringReader {
 		final RingBuffer<CharBuf>[] buffers;
 		CountDownLatch latch;
 		List<Task> taskList;
-		Object lock = new Object();
+		final Object lock = new Object();
 		int failCnt = 0;
 
 		Distributor(int thread, int bufSize) {
@@ -251,7 +251,7 @@ final class N2NStringReader {
 
 			list.sort(new Comparator<StrNode>() {
 				public int compare(StrNode o1, StrNode o2) {
-					return o1.idx > o2.idx ? 1 : o1.idx == o2.idx ? 0 : -1;
+					return Integer.compare(o1.idx, o2.idx);
 				}
 			});
 

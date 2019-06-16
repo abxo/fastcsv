@@ -11,12 +11,10 @@ import static org.fastj.csv.Util.*;
 public class CSV {
 
 	/**
-	 * 读取CSV文件
+	 * Read CSV file
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read
 	 * @return String[][]
 	 */
 	public static String[][] readCsv(String file, String[] cols) throws IOException {
@@ -24,14 +22,11 @@ public class CSV {
 	}
 
 	/**
-	 * 读取CSV文件
+	 * Read CSV file
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param addHeader
-	 *            是否在结果中返回列头(Returns the column head in the result?)
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read
+	 * @param addHeader Whether to return the column header in the result(Returns the column head in the result?)
 	 * @return String[][]
 	 */
 	public static String[][] readCsv(String file, String[] cols, boolean addHeader) throws IOException {
@@ -39,18 +34,13 @@ public class CSV {
 	}
 
 	/**
-	 * 多线程读取CSV文件
+	 * Multi-threaded read CSV file
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param readTH
-	 *            读取线程数(Number of read-threads)
-	 * @param headerLine
-	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
-	 * @param addHeader
-	 *            是否在结果中返回列头(Returns the column head in the result?)
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read
+	 * @param readTH Number of read-threads
+	 * @param headerLine Number of rows in the column header：Starting from 0(Line-number of table heads)
+	 * @param addHeader Whether to return the column header in the result(Returns the column head in the result?)
 	 * @return String[][]
 	 */
 	public static String[][] readCsv(String file, String[] cols, int readTH, int headerLine, boolean addHeader) throws IOException {
@@ -59,12 +49,9 @@ public class CSV {
 	}
 
 	/**
-	 * @param reader
-	 *            Reader
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param addHeader
-	 *            是否在结果中返回列头(Returns the column head in the result?)
+	 * @param reader Reader
+	 * @param cols Column headers that need to be read
+	 * @param addHeader Whether to return the column header in the result(Returns the column head in the result?)
 	 * @return String[][]
 	 */
 	public static String[][] readCsv(Reader reader, String[] cols, boolean addHeader) throws IOException {
@@ -98,22 +85,15 @@ public class CSV {
 	}
 
 	/**
-	 * 按列头加速读取矩阵 Accelerating read table by column head
+	 * Accelerate reading matrix by column head Accelerating read table by column head
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param addHeader
-	 *            是否在结果中返回列头(Returns the column head in the result?)
-	 * @param readTH
-	 *            读取线程数(Number of read-threads)
-	 * @param parseTHPerRead
-	 *            每个读线程的处理线程数, 必须是2的幂(Number of processing threads per read thread,
-	 *            Must be the power of 2)
-	 * @param headerLine
-	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
-	 * @return
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read(
+	 * @param addHeader Whether to return the column header in the result(Returns the column head in the result?)
+	 * @param readTH Number of threads read(Number of read-threads)
+	 * @param parseTHPerRead Number of processing threads per read-threads, Must be a power of 2
+	 * @param headerLine Number of rows in the column header：Starting from 0(Line-number of table heads)
+	 * @return String[][]
 	 */
 	public static String[][] readCsv(String file, String[] cols, boolean addHeader, int readTH, int parseTHPerRead, int headerLine) throws IOException {
 		N2NStringReader nr = new N2NStringReader(file, readTH, parseTHPerRead, headerLine, cols);
@@ -121,19 +101,13 @@ public class CSV {
 	}
 
 	/**
-	 * 按列头加速读取矩阵 Accelerating read matrix by column head
+	 * Accelerate reading matrix by column head Accelerating read matrix by column head
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param readTH
-	 *            读取线程数(Number of read-threads)
-	 * @param parseTHPerRead
-	 *            每个读线程的处理线程数, 必须是2的幂(Number of processing threads per read thread,
-	 *            Must be the power of 2)
-	 * @param headerLine
-	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read
+	 * @param readTH Number of read-threads
+	 * @param parseTHPerRead Number of processing threads per read-threads, Must be a power of 2
+	 * @param headerLine Number of rows in the column header：Starting from 0(Line-number of table heads)
 	 * @return double[][]
 	 */
 	public static double[][] readMatrix(String file, String[] cols, int readTH, int parseTHPerRead, int headerLine) throws IOException {
@@ -142,12 +116,10 @@ public class CSV {
 	}
 
 	/**
-	 * 按列读取矩阵 Read matrix by column
+	 * Read matrix by column Read matrix by column
 	 * 
-	 * @param reader
-	 *            Reader
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
+	 * @param reader Reader
+	 * @param cols Column headers that need to be read
 	 * @return double[][]
 	 */
 	public static double[][] readMatrix(Reader reader, String[] cols) throws IOException {
@@ -176,12 +148,10 @@ public class CSV {
 	}
 
 	/**
-	 * 按列读取矩阵 Read matrix by column
+	 * Read matrix by column Read matrix by column
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
+	 * @param file Only local files are supported
+	 * @param cols Column headers that need to be read
 	 * @return double[][]
 	 */
 	public static double[][] readMatrix(String file, String[] cols) throws IOException {
@@ -189,16 +159,12 @@ public class CSV {
 	}
 
 	/**
-	 * 多线程读取矩阵
+	 * Multi-threaded read matrix
 	 * 
-	 * @param file
-	 *            仅支持本地文件(Local file only)
-	 * @param cols
-	 *            需要读取的列头(Columns to read)
-	 * @param readTH
-	 *            读取线程数(Number of read-threads)
-	 * @param headerLine
-	 *            列头所在行数：从0开始(Line-number of table heads: starting from 0)
+	 * @param file Only local files are supported
+	 * @param cols  Column headers that need to be read
+	 * @param readTH Number of read-threads
+	 * @param headerLine Number of rows in the column header：Starting from 0(Line-number of table heads)
 	 * @return double[][]
 	 */
 	public static double[][] readMatrix(String file, String[] cols, int readTH, int headerLine) throws IOException {
