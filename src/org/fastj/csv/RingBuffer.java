@@ -64,11 +64,11 @@ public class RingBuffer<T> {
 		finish = true;
 	}
 
-	private final boolean isEmpty() {
+	private boolean isEmpty() {
 		return rpc == wpc;
 	}
 
-	private final boolean isFull() {
+	private boolean isFull() {
 		return ((wpc + 1) & mask) == rpc;
 	}
 }

@@ -74,7 +74,7 @@ public final class CharBuf {
 		value[count++] = c;
 	}
 
-	public CharBuf append(char str[], int offset, int len) {
+	public CharBuf append(char[] str, int offset, int len) {
 		int nlen = count + len;
 		if (capacity < nlen) {
 			ensureCapacity(nlen);

@@ -93,7 +93,7 @@ public class CSV {
 	 * @param readTH Number of threads read(Number of read-threads)
 	 * @param parseTHPerRead Number of processing threads per read-threads, Must be a power of 2
 	 * @param headerLine Number of rows in the column header：Starting from 0(Line-number of table heads)
-	 * @return
+	 * @return String[][]
 	 */
 	public static String[][] readCsv(String file, String[] cols, boolean addHeader, int readTH, int parseTHPerRead, int headerLine) throws IOException {
 		N2NStringReader nr = new N2NStringReader(file, readTH, parseTHPerRead, headerLine, cols);

@@ -1,5 +1,6 @@
 package org.fastj.csv;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -173,15 +174,13 @@ public class Util {
 	static int[] createVidxExclude(String[] headers, String[] exCols) {
 
 		List<String> cols = new LinkedList<>();
-		for (String h : headers) {
-			cols.add(h);
-		}
+		Collections.addAll(cols, headers);
 
 		for (String h : exCols) {
 			cols.remove(h);
 		}
 
-		return createVidx(headers, cols.toArray(new String[cols.size()]));
+		return createVidx(headers, cols.toArray(new String[0]));
 	}
 
 	static int[] createVidx(String[] headers, String[] cols) {

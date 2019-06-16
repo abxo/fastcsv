@@ -169,7 +169,7 @@ final class N2NMatrixReader {
 		int index = 0;
 		CountDownLatch latch;
 		List<Task> taskList;
-		Object lock = new Object();
+		final Object lock = new Object();
 		int failCnt = 0;
 
 		NDistributor(int thread, int bufSize) {
@@ -240,7 +240,7 @@ final class N2NMatrixReader {
 
 			list.sort(new Comparator<DNode>() {
 				public int compare(DNode o1, DNode o2) {
-					return o1.idx > o2.idx ? 1 : o1.idx == o2.idx ? 0 : -1;
+					return Integer.compare(o1.idx, o2.idx);
 				}
 			});
 

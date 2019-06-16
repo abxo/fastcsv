@@ -174,7 +174,7 @@ public class ChannelReader implements Closeable {
 		}
 	}
 
-	private final CharBuf b2c(ByteBuf bbuf, CharBuf cbuf) throws IOException {
+	private CharBuf b2c(ByteBuf bbuf, CharBuf cbuf) throws IOException {
 		cbuf = cbuf == null ? CharBuf.POOL.get() : cbuf;
 		cbuf.reset();
 		ByteBuffer bb = ByteBuffer.wrap(bbuf.value, 0, bbuf.count);
